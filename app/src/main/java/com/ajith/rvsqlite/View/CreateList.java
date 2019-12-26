@@ -3,6 +3,7 @@ package com.ajith.rvsqlite.View;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ajith.rvsqlite.R;
+
+import java.util.Objects;
 
 public class CreateList extends Fragment {
 
@@ -23,7 +26,7 @@ public class CreateList extends Fragment {
         // Required empty public constructor
     }
 
-    public static CreateList newInstance() {
+    static CreateList newInstance() {
         return new CreateList();
     }
 
@@ -50,8 +53,8 @@ public class CreateList extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(Objects.requireNonNull(context));
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {

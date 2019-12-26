@@ -10,8 +10,8 @@ import com.ajith.rvsqlite.Model.GroceryContract.*;
 
 public class GroceryDbHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "groceryList.db";
-    public static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "groceryList.db";
+    private static final int DATABASE_VERSION = 1;
 
     public GroceryDbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

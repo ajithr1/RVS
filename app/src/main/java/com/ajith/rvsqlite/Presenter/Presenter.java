@@ -1,17 +1,33 @@
 package com.ajith.rvsqlite.Presenter;
 
 import android.content.Context;
-import android.database.Cursor;
+import android.util.Log;
 
 import com.ajith.rvsqlite.Model.Model;
 import com.ajith.rvsqlite.Model.ModelInt;
 
 public class Presenter implements PresenterInt {
 
-    ModelInt modelInt;
+    private static final String TAG = "ajju";
+
+    private ModelInt modelInt;
+
     @Override
-    public Cursor getA(Context context) {
+    public boolean insertToModel(String s, Context context) {
+        Log.d(TAG, "Insert Presenter");
         modelInt = new Model(context);
-        return modelInt.getAllItems();
+        return modelInt.insertToDb(s);
+    }
+
+    @Override
+    public String getItemAt(int pos, Context context) {
+        modelInt = new Model(context);
+        return modelInt.getItemAt(pos);
+    }
+
+    @Override
+    public int getItemCount(Context context) {
+        modelInt = new Model(context);
+        return modelInt.getCount();
     }
 }

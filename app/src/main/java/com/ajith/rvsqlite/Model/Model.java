@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class Model implements ModelInt {
 
-    public static final String TAG = "ajju";
+    private static final String TAG = "ajju";
     private Cursor cursor;
 
     private SQLiteDatabase sqLiteDatabase;
@@ -23,19 +23,30 @@ public class Model implements ModelInt {
     public boolean insertToDb(String s) {
         ContentValues cv = new ContentValues();
         cv.put(GroceryContract.GroceryEntry.COLUMN_NAME, s);
-
+        Log.d(TAG, "Insert Model");
         long result = sqLiteDatabase.insert(GroceryContract.GroceryEntry.TABLE_NAME, null,cv);
 
-        if (result == -1){
-            Log.d(TAG, "insert returned -1");
-            return false;
-        }else {
-            return true;
-        }
+        return result != -1;
     }
 
-    public Cursor getAllItems(){
+    private Cursor getAllItems(){
         return sqLiteDatabase.query(GroceryContract.GroceryEntry.TABLE_NAME, null, null
                 ,null, null, null , null + " DESC ");
+    }
+
+    @Override
+    public int getCount(){
+        cursor = getAllItems();
+        return cursor.getCount();
+    }
+
+    @Override
+    public String getItemAt(int position) {
+        cursor = getAllItems();
+        if (!cursor.moveToPosition(position)){
+            return null;
+        }else {
+            return cursor.getString(cursor.getColumnIndex(GroceryContract.GroceryEntry.COLUMN_NAME));
+        }
     }
 }

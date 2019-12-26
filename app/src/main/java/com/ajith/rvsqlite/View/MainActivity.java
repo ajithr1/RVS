@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import com.ajith.rvsqlite.Presenter.PresenterInt;
 import com.ajith.rvsqlite.R;
 
 public class MainActivity extends AppCompatActivity implements CreateList.OnFragmentInteractionListener, ViewInt {
+
+    public static final String TAG = "ajju";
 
     FragmentManager fragmentManager;
     CreateList createShopList;
@@ -37,14 +40,16 @@ public class MainActivity extends AppCompatActivity implements CreateList.OnFrag
         GroceryDbHelper dbHelper = new GroceryDbHelper(this);
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
+        Log.d(TAG, "onCreate: ");
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        groceryAdapter = new GroceryAdapter(this, getAll(getApplicationContext()));
+        groceryAdapter = new GroceryAdapter(this);
         recyclerView.setAdapter(groceryAdapter);
     }
 
     public void insert(View view) {
+        Log.d(TAG, "create button clicked and fragment started");
         fragmentManager = getSupportFragmentManager();
         createShopList = CreateList.newInstance();
         fragmentManager.beginTransaction().addToBackStack(null).add(R.id.con, createShopList).commit();
@@ -52,22 +57,15 @@ public class MainActivity extends AppCompatActivity implements CreateList.OnFrag
 
     @Override
     public void onFragmentInteraction(String sendBackText) {
-        ContentValues cv = new ContentValues();
-        cv.put(GroceryContract.GroceryEntry.COLUMN_NAME, sendBackText);
-
-        long result = sqLiteDatabase.insert(GroceryContract.GroceryEntry.TABLE_NAME, null,cv);
-        groceryAdapter.swapCursor(getAll(getApplicationContext()));
-        onBackPressed();
-
-        if (result == -1) {
-            Toast.makeText(this, "Inserted text - " + sendBackText, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    @Override
-    public Cursor getAll(Context context) {
+        Log.d(TAG, "data from fragment"+ sendBackText);
         presenterInt = new Presenter();
-        return presenterInt.getA(context);
+        Log.d(TAG, "Insert View");
+        boolean isInserted = presenterInt.insertToModel(sendBackText, getApplicationContext());
+        if (!isInserted){
+            Toast.makeText(this, "insertion failed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "inserted", Toast.LENGTH_SHORT).show();
+        }
+        onBackPressed();
     }
 }

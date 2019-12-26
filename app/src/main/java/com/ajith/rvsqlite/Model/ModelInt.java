@@ -6,5 +6,7 @@ public interface ModelInt {
 
     boolean insertToDb(String s);
 
-    Cursor getAllItems();
+    String getItemAt(int position);
+
+    int getCount();
 }

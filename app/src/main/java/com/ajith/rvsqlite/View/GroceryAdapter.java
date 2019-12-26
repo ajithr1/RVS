@@ -1,7 +1,7 @@
 package com.ajith.rvsqlite.View;
 
 import android.content.Context;
-import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ajith.rvsqlite.Model.GroceryContract;
+import com.ajith.rvsqlite.Presenter.Presenter;
+import com.ajith.rvsqlite.Presenter.PresenterInt;
 import com.ajith.rvsqlite.R;
 
 public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryViewHolder> {
 
     private Context context;
-    private Cursor cursor;
+    private PresenterInt p;
 
-    GroceryAdapter(Context context, Cursor cursor){
+    private static final String TAG = "ajju";
+
+    GroceryAdapter(Context context) {
         this.context = context;
-        this.cursor = cursor;
     }
 
     @NonNull
@@ -34,21 +36,19 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
 
     @Override
     public void onBindViewHolder(@NonNull GroceryViewHolder holder, int position) {
-
-        if (!cursor.moveToPosition(position)){
-            return;
-        }else {
-            String nameText = cursor.getString(cursor.getColumnIndex(GroceryContract.GroceryEntry.COLUMN_NAME));
-            holder.textView.setText(nameText);
-        }
+        p = new Presenter();
+        Log.d(TAG, p.getItemAt(position, context));
+        holder.textView.setText(p.getItemAt(position, context));
     }
 
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        p = new Presenter();
+        Log.d(TAG, String.valueOf(p.getItemCount(context)));
+        return p.getItemCount(context);
     }
 
-    class GroceryViewHolder extends RecyclerView.ViewHolder{
+    class GroceryViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textView;
 
@@ -56,19 +56,6 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
             super(itemView);
 
             textView = itemView.findViewById(R.id.grocery_name);
-        }
-    }
-
-    void swapCursor(Cursor newCursor){
-
-        if (cursor != null){
-            cursor.close();
-        }
-
-        cursor = newCursor;
-
-        if (newCursor != null){
-            notifyDataSetChanged();
         }
     }
 }

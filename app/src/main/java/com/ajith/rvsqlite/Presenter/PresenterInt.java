@@ -1,9 +1,12 @@
 package com.ajith.rvsqlite.Presenter;
 
 import android.content.Context;
-import android.database.Cursor;
 
 public interface PresenterInt {
 
-    Cursor getA(Context context);
+    boolean insertToModel(String string, Context context);
+
+    String getItemAt(int pos, Context context);
+
+    int getItemCount(Context context);
 }

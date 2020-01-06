@@ -34,7 +34,7 @@ public class TodoRepository implements IListInteracted {
                 TodoContract.PROJECTION_ALL,
                 null,
                 null,
-                TodoContract.TITLE + " DESC");
+                null);
 
         if (null == cursor || !cursor.moveToNext()) {
             return todoList;

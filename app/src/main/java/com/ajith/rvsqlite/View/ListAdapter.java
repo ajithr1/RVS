@@ -1,7 +1,6 @@
-package com.ajith.rvsqlite.List;
+package com.ajith.rvsqlite.View;
 
 import android.content.Context;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.ajith.rvsqlite.R;
 
 import java.util.ArrayList;
 
-import static com.ajith.rvsqlite.List.ListActivity.TAG;
+import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
 public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

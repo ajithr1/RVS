@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".List.ListActivity"
+            android:name=".View.ListActivity"
             android:label="To.Do">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

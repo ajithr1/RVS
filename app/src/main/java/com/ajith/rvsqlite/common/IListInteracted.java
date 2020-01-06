@@ -1,7 +1,6 @@
-package com.ajith.rvsqlite.List;
+package com.ajith.rvsqlite.common;
 
 import com.ajith.rvsqlite.Model.Entity.Todo;
-import com.ajith.rvsqlite.common.ITodoActionsInteracted;
 
 import java.util.ArrayList;
 

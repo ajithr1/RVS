@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.List;
+package com.ajith.rvsqlite.Presenter;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,10 +6,14 @@ import android.widget.Toast;
 
 import com.ajith.rvsqlite.Model.Entity.Todo;
 import com.ajith.rvsqlite.Model.TodoRepository;
+import com.ajith.rvsqlite.Presenter.IListPresenter;
+import com.ajith.rvsqlite.View.IListView;
+import com.ajith.rvsqlite.View.ListActivity;
+import com.ajith.rvsqlite.common.IListInteracted;
 
-import static com.ajith.rvsqlite.List.ListActivity.TAG;
+import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
-class ListPresenter implements IListPresenter {
+public class ListPresenter implements IListPresenter {
 
     private IListView view;
     private IListInteracted interacted;
@@ -17,7 +21,7 @@ class ListPresenter implements IListPresenter {
 
     private Todo editTodo;
 
-    ListPresenter(ListActivity view, Context context) {
+    public ListPresenter(ListActivity view, Context context) {
         this.view       = view;
         this.interacted = new TodoRepository(context.getContentResolver());
         this.context    = context;
@@ -51,7 +55,6 @@ class ListPresenter implements IListPresenter {
 
     @Override
     public void delete(Todo todo) {
-
     }
 
     @Override

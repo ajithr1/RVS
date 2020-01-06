@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00E5FF"
-    tools:context=".List.ListActivity">
+    tools:context=".View.ListActivity">
 
     <Button
         android:id="@+id/create"

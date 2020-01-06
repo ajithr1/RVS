@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.ajith.rvsqlite.Model.Connection.Database;
 
-import static com.ajith.rvsqlite.List.ListActivity.TAG;
+import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
 public class TodoProvider extends ContentProvider {
 

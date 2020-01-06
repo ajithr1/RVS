@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.List;
+package com.ajith.rvsqlite.View;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 import com.ajith.rvsqlite.R;
 
-import static com.ajith.rvsqlite.List.ListActivity.TAG;
+import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
 
 /**

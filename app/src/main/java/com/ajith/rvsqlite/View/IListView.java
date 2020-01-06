@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.List;
+package com.ajith.rvsqlite.View;
 
 import com.ajith.rvsqlite.Model.Entity.Todo;
 

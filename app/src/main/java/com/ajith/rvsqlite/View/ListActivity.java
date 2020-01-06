@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.List;
+package com.ajith.rvsqlite.View;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ajith.rvsqlite.Model.Entity.Todo;
+import com.ajith.rvsqlite.Presenter.IListPresenter;
+import com.ajith.rvsqlite.Presenter.ListPresenter;
 import com.ajith.rvsqlite.R;
 
 import java.util.ArrayList;

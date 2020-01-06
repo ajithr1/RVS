@@ -6,13 +6,13 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.ajith.rvsqlite.List.IListInteracted;
+import com.ajith.rvsqlite.common.IListInteracted;
 import com.ajith.rvsqlite.Model.ContentProvider.TodoContract;
 import com.ajith.rvsqlite.Model.Entity.Todo;
 
 import java.util.ArrayList;
 
-import static com.ajith.rvsqlite.List.ListActivity.TAG;
+import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
 public class TodoRepository implements IListInteracted {
 

@@ -24,7 +24,7 @@ public class TodoContract implements BaseColumns {
 
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE
             + " (" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + TITLE + " TEXT, " + ");";
+            + TITLE + " TEXT);";
 
     public static final String FIXTURE =
             "INSERT INTO " + TABLE

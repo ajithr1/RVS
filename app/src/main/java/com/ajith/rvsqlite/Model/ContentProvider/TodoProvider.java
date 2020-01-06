@@ -6,11 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.ajith.rvsqlite.Model.Connection.Database;
+
+import static com.ajith.rvsqlite.List.ListActivity.TAG;
 
 public class TodoProvider extends ContentProvider {
 
@@ -40,6 +43,7 @@ public class TodoProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+        Log.d(TAG, "insert: TodoProvider");
         Long insertedId = this.doInsert(TodoContract.TABLE, values);
         return Uri.withAppendedPath(uri, String.valueOf(insertedId));
     }

@@ -5,18 +5,17 @@ import com.ajith.rvsqlite.common.ITodoActionsInteracted;
 
 import java.util.ArrayList;
 
-public interface IListInteractor extends ITodoActionsInteracted {
+public interface IListInteracted extends ITodoActionsInteracted {
 
     /**
      * Get all To.Dos from database
-     * @return ArrayList
      */
     ArrayList<Todo> get();
 
     /**
      * Update old To.Do
-     *
-     * @param todo
      */
     void update(Todo todo);
+
+    void create(Todo todo);
 }

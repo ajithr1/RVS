@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00E5FF"
-    tools:context=".MainActivity">
+    tools:context=".List.ListActivity">
 
     <Button
         android:id="@+id/create"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="#00E5FF"
-        android:onClick="insert"
+        android:onClick="create"
         android:text="@string/create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

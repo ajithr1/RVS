@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.ajith.rvsqlite.Model.ContentProvider.TodoContract;
+
 public class Todo implements Parcelable {
 
     public static final long UNSAVED_ID = Long.MAX_VALUE;
@@ -22,11 +24,11 @@ public class Todo implements Parcelable {
     }
 
     public Todo(Cursor cursor) {
-        //int idIdx           = cursor.getColumnIndex(TodoContract._ID);
-        //int titleIdx        = cursor.getColumnIndex(TodoContract.TITLE);
+        int idIdx           = cursor.getColumnIndex(TodoContract._ID);
+        int titleIdx        = cursor.getColumnIndex(TodoContract.TITLE);
 
-        //this.id          = cursor.getInt(idIdx);
-        //this.title       = cursor.getString(titleIdx);
+        this.id          = cursor.getInt(idIdx);
+        this.title       = cursor.getString(titleIdx);
     }
 
     public Todo(Parcel in) {

@@ -4,15 +4,17 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
-import com.ajith.rvsqlite.List.IListInteractor;
+import com.ajith.rvsqlite.List.IListInteracted;
 import com.ajith.rvsqlite.Model.ContentProvider.TodoContract;
 import com.ajith.rvsqlite.Model.Entity.Todo;
-import com.ajith.rvsqlite.Todo.ITodoInteractor;
 
 import java.util.ArrayList;
 
-public class TodoRepository implements IListInteractor, ITodoInteractor {
+import static com.ajith.rvsqlite.List.ListActivity.TAG;
+
+public class TodoRepository implements IListInteracted {
 
     private ContentResolver contentResolver;
 
@@ -32,7 +34,7 @@ public class TodoRepository implements IListInteractor, ITodoInteractor {
                 TodoContract.PROJECTION_ALL,
                 null,
                 null,
-                " DESC");
+                TodoContract.TITLE + " DESC");
 
         if (null == cursor || !cursor.moveToNext()) {
             return todoList;
@@ -55,6 +57,7 @@ public class TodoRepository implements IListInteractor, ITodoInteractor {
 
     @Override
     public void create(Todo todo) {
+        Log.d(TAG, "create: in TodoRepository");
         save(todo);
     }
 
@@ -68,10 +71,12 @@ public class TodoRepository implements IListInteractor, ITodoInteractor {
     }
 
     private void save(Todo todo) {
+        Log.d(TAG, "save: TodoRepository");
         ContentValues values = new ContentValues();
         values.put(TodoContract.TITLE, todo.getTitle());
 
         if (todo.getId() == Todo.UNSAVED_ID) {
+            Log.d(TAG, "save: in insert ");
             Uri insertUri = getContentResolver().insert(TodoContract.CONTENT_URI, values);
             todo.setId(Long.valueOf(insertUri.getLastPathSegment()));
         } else {

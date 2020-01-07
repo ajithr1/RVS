@@ -18,12 +18,12 @@ public class TodoRepository implements IListInteracted {
 
     private ContentResolver contentResolver;
 
-    private ContentResolver getContentResolver() {
-        return contentResolver;
-    }
-
     public TodoRepository(ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
+    }
+
+    private ContentResolver getContentResolver() {
+        return contentResolver;
     }
 
     @Override
@@ -63,6 +63,7 @@ public class TodoRepository implements IListInteracted {
 
     @Override
     public void delete(Todo todo) {
+        Log.d(TAG, "delete: repo  "+todo);
         String[] selectionArgs = {String.valueOf(todo.getId())};
         getContentResolver().delete(
                 TodoContract.CONTENT_URI,

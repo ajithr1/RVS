@@ -22,14 +22,15 @@ public class ListPresenter implements IListPresenter {
     private Todo editTodo;
 
     public ListPresenter(ListActivity view, Context context) {
-        this.view       = view;
+
+        this.view = view;
         this.interacted = new TodoRepository(context.getContentResolver());
-        this.context    = context;
+        this.context = context;
     }
 
     @Override
     public void refreshSession() {
-        Log.d(TAG, "refreshSession: "+interacted.get().toString());
+        Log.d(TAG, "refreshSession: " + interacted.get().toString());
         view.setTodo(interacted.get());
     }
 
@@ -55,6 +56,9 @@ public class ListPresenter implements IListPresenter {
 
     @Override
     public void delete(Todo todo) {
+        interacted.delete(todo);
+        Log.d(TAG, "delete: presenter");
+        Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
     }
 
     @Override

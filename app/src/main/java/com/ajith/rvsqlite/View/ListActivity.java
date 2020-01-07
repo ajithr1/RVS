@@ -45,10 +45,10 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         if (savedInstanceState == null) {
-            listAdapter = new ListAdapter(this, new ArrayList<Todo>());
+            listAdapter = new ListAdapter(this, new ArrayList<Todo>(), onTodoClickToEditListener);
         } else {
             ArrayList<Todo> todoArrayList = savedInstanceState.getParcelableArrayList(STATE_LIST);
-            listAdapter = new ListAdapter(this, todoArrayList);
+            listAdapter = new ListAdapter(this, todoArrayList, onTodoClickToEditListener);
         }
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -136,4 +136,12 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
         CreateTodoFragment createTodoFragment = CreateTodoFragment.newInstance();
         fragmentManager.beginTransaction().addToBackStack(null).add(R.id.con, createTodoFragment).commit();
     }
+
+    private ListAdapter.TodoViewHolder.IOnClickToEditListener onTodoClickToEditListener = new ListAdapter.TodoViewHolder.IOnClickToEditListener() {
+        @Override
+        public void onClickToEditListener(Todo todo, int position) {
+            Log.d(TAG, "onClickToEditListener: delete activity");
+            getPresenter().delete(todo);
+        }
+    };
 }

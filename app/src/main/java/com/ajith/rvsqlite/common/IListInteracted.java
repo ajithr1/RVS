@@ -4,7 +4,7 @@ import com.ajith.rvsqlite.Model.Entity.Todo;
 
 import java.util.ArrayList;
 
-public interface IListInteracted extends ITodoActionsInteracted {
+public interface IListInteracted {
 
     /**
      * Get all To.Dos from database
@@ -17,4 +17,6 @@ public interface IListInteracted extends ITodoActionsInteracted {
     void update(Todo todo);
 
     void create(Todo todo);
+
+    void delete(Todo todo);
 }

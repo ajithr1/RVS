@@ -19,7 +19,7 @@ import com.ajith.rvsqlite.R;
 
 import java.util.ArrayList;
 
-public class ListActivity extends AppCompatActivity implements  CreateTodoFragment.OnFragmentInteractionListener, IListView {
+public class ListActivity extends AppCompatActivity implements  CreateTodoFragment.OnFragmentInteractionListener, EditTodo.OnEditFragmentInteractionListener,IListView {
 
     public static final String TAG = "ajju";
 
@@ -28,6 +28,8 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
     private IListPresenter presenter;
 
     private ListAdapter listAdapter;
+
+    private Todo todo;
 
     public IListPresenter getPresenter() {
         if (presenter == null) {
@@ -45,10 +47,10 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         if (savedInstanceState == null) {
-            listAdapter = new ListAdapter(this, new ArrayList<Todo>(), onTodoClickToEditListener);
+            listAdapter = new ListAdapter(this, new ArrayList<Todo>(), onTodoClickToEditListener, onEditItemInterface);
         } else {
             ArrayList<Todo> todoArrayList = savedInstanceState.getParcelableArrayList(STATE_LIST);
-            listAdapter = new ListAdapter(this, todoArrayList, onTodoClickToEditListener);
+            listAdapter = new ListAdapter(this, todoArrayList, onTodoClickToEditListener, onEditItemInterface);
         }
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -96,23 +98,6 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
     }
 
     @Override
-    public void showItemDialog(final Todo todo, final CharSequence[] items) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (items[which] == getString(R.string.edit)) {
-                    presenter.onClickTodoItemToEdit(todo);
-                }
-                if (items[which] == getString(R.string.delete)) {
-                    presenter.delete(todo);
-                }
-            }
-        });
-        builder.show();
-    }
-
-    @Override
     public void showTodoViewToEdit(Todo todo) {
 
     }
@@ -122,26 +107,49 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
 
     }
 
+    public void create(View view) {
+        Log.d(TAG, "create: button Clicked");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        CreateTodoFragment newTodo = CreateTodoFragment.newInstance();
+        fragmentManager.beginTransaction().addToBackStack(null).add(R.id.con, newTodo).commit();
+    }
+
+    private ListAdapter.TodoViewHolder.DeleteItemInterface onTodoClickToEditListener = new ListAdapter.TodoViewHolder.DeleteItemInterface() {
+        @Override
+        public void deleteItem(Todo todo, int position) {
+            Log.d(TAG, "deleteItem: delete activity");
+            getPresenter().delete(todo);
+        }
+    };
+    
+    private ListAdapter.TodoViewHolder.EditItemInterface onEditItemInterface = new ListAdapter.TodoViewHolder.EditItemInterface() {
+        @Override
+        public void editItem(Todo mTodo, int position) {
+            Log.d(TAG, "editItem: edit activity");
+
+            todo = mTodo;
+
+            Log.d(TAG, "editItem: "+todo.getId());
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            EditTodo editTodo = EditTodo.newInstance(todo.getTitle(), String.valueOf(todo.getId()));
+            fragmentManager.beginTransaction().addToBackStack(null).add(R.id.con, editTodo).commit();
+        }
+    };
+
     @Override
     public void onFragmentInteraction(String string) {
-        Log.d(TAG, "onFragmentInteraction: string sent"+string);
         getPresenter().create(string);
         onBackPressed();
         getPresenter().refreshSession();
     }
 
-    public void create(View view) {
-        Log.d(TAG, "create: button Clicked");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        CreateTodoFragment createTodoFragment = CreateTodoFragment.newInstance();
-        fragmentManager.beginTransaction().addToBackStack(null).add(R.id.con, createTodoFragment).commit();
+    @Override
+    public void onEditFragmentInteraction(String name, String id) {
+        todo.setTitle(name);
+        todo.setId(Long.valueOf(id));
+        getPresenter().edit(todo);
+        onBackPressed();
+        getPresenter().refreshSession();
     }
-
-    private ListAdapter.TodoViewHolder.IOnClickToEditListener onTodoClickToEditListener = new ListAdapter.TodoViewHolder.IOnClickToEditListener() {
-        @Override
-        public void onClickToEditListener(Todo todo, int position) {
-            Log.d(TAG, "onClickToEditListener: delete activity");
-            getPresenter().delete(todo);
-        }
-    };
 }

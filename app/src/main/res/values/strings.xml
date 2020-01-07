@@ -28,4 +28,6 @@
     <string name="description">Description</string>
     <string name="title">Title</string>
     <string name="menu_options">⋮</string>
+    <string name="enter_name_of_list">Enter name of List</string>
+    <string name="send">send</string>
 </resources>

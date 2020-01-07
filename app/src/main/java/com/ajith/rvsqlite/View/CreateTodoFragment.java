@@ -3,6 +3,7 @@ package com.ajith.rvsqlite.View;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -61,20 +62,20 @@ public class CreateTodoFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String string) {
+    private void onButtonPressed(String string) {
         if (mListener != null) {
             mListener.onFragmentInteraction(string);
         }
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnEditFragmentInteractionListener");
         }
     }
 

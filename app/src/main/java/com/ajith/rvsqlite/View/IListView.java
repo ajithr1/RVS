@@ -27,11 +27,6 @@ public interface IListView {
     void notifyListItemInserted(int position);
 
     /**
-     * Show Dialog with To.Do actions
-     */
-    void showItemDialog(Todo todo, CharSequence[] items);
-
-    /**
      * Show TodoView to edit old To.Do
      */
     void showTodoViewToEdit(Todo todo);

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -17,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ajith.rvsqlite.Model.ContentProvider.TodoProvider;
 import com.ajith.rvsqlite.Model.Entity.Todo;
 import com.ajith.rvsqlite.R;
 
@@ -30,15 +28,17 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<Todo> todo_list;
     private Context context;
 
-    private TodoViewHolder.IOnClickToEditListener todoIOnClickToEditListener;
+    private TodoViewHolder.DeleteItemInterface todoDeleteItemInterface;
+    private TodoViewHolder.EditItemInterface editItemInterface;
 
     private static final int TYPE_NO_TODO = 0;
     private static final int TYPE_TODO = 1;
 
-    ListAdapter(Context context, ArrayList<Todo> todo_list, TodoViewHolder.IOnClickToEditListener todoIOnClickToEditListener) {
+    ListAdapter(Context context, ArrayList<Todo> todo_list, TodoViewHolder.DeleteItemInterface todoDeleteItemInterface, TodoViewHolder.EditItemInterface editItemInterface) {
         this.context = context;
         this.todo_list = todo_list;
-        this.todoIOnClickToEditListener = todoIOnClickToEditListener;
+        this.todoDeleteItemInterface = todoDeleteItemInterface;
+        this.editItemInterface = editItemInterface;
     }
 
     void setTodo_list(ArrayList<Todo> todo_list) {
@@ -87,11 +87,12 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                                 switch (item.getItemId()){
                                     case R.id.edit_option:
+                                        editItemInterface.editItem(todo, position);
                                         Toast.makeText(context, todo.getTitle(), Toast.LENGTH_SHORT).show();
                                         break;
                                     case R.id.delete_option:
                                         Log.d(TAG, "delete:  adapter"+todo.getId());
-                                        todoIOnClickToEditListener.onClickToEditListener(todo, position);
+                                        todoDeleteItemInterface.deleteItem(todo, position);
                                         todo_list.remove(position);
                                         notifyDataSetChanged();
                                         break;
@@ -137,11 +138,20 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         /**
-         * Interface to ViewHolder onClick
+         * Interface to delete
          */
-        public interface IOnClickToEditListener {
+        public interface DeleteItemInterface {
 
-            void onClickToEditListener(Todo todo, int position);
+            void deleteItem(Todo todo, int position);
+
+        }
+
+        /**
+         * Interface to delete
+         */
+        public interface EditItemInterface {
+
+            void editItem(Todo todo, int position);
 
         }
     }

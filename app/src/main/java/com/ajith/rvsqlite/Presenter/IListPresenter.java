@@ -10,24 +10,9 @@ public interface IListPresenter {
     void refreshSession();
 
     /**
-     * Action when the user click on Fab button
-     */
-    void onAddTodoButtonClick();
-
-    /**
      * Action when the user click to edit on To.Do item
      */
-    void onClickTodoItemToEdit(Todo todo);
-
-    /**
-     * Action when the user long click on To.Do item
-     */
-    void onLongClickTodoItem(Todo todo);
-
-    /**
-     * Update To.Do completed property
-     */
-    void updateTodoIsCompleted(Todo todo, boolean completed, int position);
+    void edit(Todo todo);
 
     /**
      * Delete old To.Do

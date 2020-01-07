@@ -35,24 +35,10 @@ public class ListPresenter implements IListPresenter {
     }
 
     @Override
-    public void onAddTodoButtonClick() {
-
+    public void edit(Todo todo) {
+        interacted.create(todo);
     }
-
-    @Override
-    public void onClickTodoItemToEdit(Todo todo) {
-
-    }
-
-    @Override
-    public void onLongClickTodoItem(Todo todo) {
-
-    }
-
-    @Override
-    public void updateTodoIsCompleted(Todo todo, boolean completed, int position) {
-
-    }
+    
 
     @Override
     public void delete(Todo todo) {

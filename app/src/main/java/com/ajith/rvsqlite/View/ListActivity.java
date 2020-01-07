@@ -82,31 +82,6 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
         listAdapter.setTodo_list(todo);
     }
 
-    @Override
-    public void notifyListDataSetChanged() {
-        listAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void notifyListItemRemoved(int position) {
-        listAdapter.notifyItemRemoved(position);
-    }
-
-    @Override
-    public void notifyListItemInserted(int position) {
-        listAdapter.notifyItemInserted(position);
-    }
-
-    @Override
-    public void showTodoViewToEdit(Todo todo) {
-
-    }
-
-    @Override
-    public void showTodoView() {
-
-    }
-
     public void create(View view) {
         Log.d(TAG, "create: button Clicked");
         FragmentManager fragmentManager = getSupportFragmentManager();

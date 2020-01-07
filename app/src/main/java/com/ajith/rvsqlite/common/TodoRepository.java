@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.Model;
+package com.ajith.rvsqlite.common;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -6,11 +6,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.ajith.rvsqlite.common.IListInteracted;
 import com.ajith.rvsqlite.Model.ContentProvider.TodoContract;
 import com.ajith.rvsqlite.Model.Entity.Todo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
@@ -79,7 +79,8 @@ public class TodoRepository implements IListInteracted {
         if (todo.getId() == Todo.UNSAVED_ID) {
             Log.d(TAG, "save: in insert ");
             Uri insertUri = getContentResolver().insert(TodoContract.CONTENT_URI, values);
-            todo.setId(Long.valueOf(insertUri.getLastPathSegment()));
+            assert insertUri != null;
+            todo.setId(Long.valueOf(Objects.requireNonNull(insertUri.getLastPathSegment())));
         } else {
             String[] selectionArgs = {String.valueOf(todo.getId())};
             getContentResolver().update(

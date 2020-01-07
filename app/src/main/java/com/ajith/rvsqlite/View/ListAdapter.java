@@ -93,7 +93,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                         Log.d(TAG, "delete:  adapter"+todo.getId());
                                         todoIOnClickToEditListener.onClickToEditListener(todo, position);
                                         todo_list.remove(position);
-                                        notifyItemRemoved(position);
+                                        notifyDataSetChanged();
                                         break;
                                 }
                                 return true;

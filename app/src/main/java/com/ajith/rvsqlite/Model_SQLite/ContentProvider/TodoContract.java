@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.Model.ContentProvider;
+package com.ajith.rvsqlite.Model_SQLite.ContentProvider;
 
 import android.content.ContentResolver;
 import android.net.Uri;

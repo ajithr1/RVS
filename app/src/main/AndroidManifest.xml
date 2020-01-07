@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".common.Entity.Testing"></activity>
         <activity
             android:name=".View.ListActivity"
             android:label="To.Do">
@@ -20,9 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:name=".Model.ContentProvider.TodoProvider"
-            android:authorities="com.ajith.rvsqlite.Model.provider.TodoProvider"
+            android:name=".Model_SQLite.ContentProvider.TodoProvider"
+            android:authorities="com.ajith.rvsqlite.Model_SQLite.provider.TodoProvider"
             android:exported="false" />
     </application>
 

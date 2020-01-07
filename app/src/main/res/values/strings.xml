@@ -30,4 +30,7 @@
     <string name="menu_options">⋮</string>
     <string name="enter_name_of_list">Enter name of List</string>
     <string name="send">send</string>
+    <string name="insert">insert</string>
+    <string name="enter_text">enter text</string>
+    <string name="test">Test</string>
 </resources>

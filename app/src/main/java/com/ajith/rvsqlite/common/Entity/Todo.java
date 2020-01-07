@@ -1,10 +1,10 @@
-package com.ajith.rvsqlite.Model.Entity;
+package com.ajith.rvsqlite.common.Entity;
 
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.ajith.rvsqlite.Model.ContentProvider.TodoContract;
+import com.ajith.rvsqlite.Model_SQLite.ContentProvider.TodoContract;
 
 public class Todo implements Parcelable {
 

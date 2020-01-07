@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.Model.ContentProvider;
+package com.ajith.rvsqlite.Model_SQLite.ContentProvider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -11,7 +11,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ajith.rvsqlite.Model.Connection.Database;
+import com.ajith.rvsqlite.Model_SQLite.Connection.Database;
 
 import static com.ajith.rvsqlite.View.ListActivity.TAG;
 

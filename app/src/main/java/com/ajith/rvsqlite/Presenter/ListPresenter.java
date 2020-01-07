@@ -4,24 +4,24 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ajith.rvsqlite.Model.Entity.Todo;
-import com.ajith.rvsqlite.common.TodoRepository;
+import com.ajith.rvsqlite.common.Entity.Todo;
+import com.ajith.rvsqlite.Model_SQLite.TodoRepositorySQLite;
 import com.ajith.rvsqlite.View.IListView;
 import com.ajith.rvsqlite.View.ListActivity;
-import com.ajith.rvsqlite.common.IListInteracted;
+import com.ajith.rvsqlite.Model_SQLite.IListModelSQLite;
 
 import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
 public class ListPresenter implements IListPresenter {
 
     private IListView view;
-    private IListInteracted interacted;
+    private IListModelSQLite interacted;
     private Context context;
     
     public ListPresenter(ListActivity view, Context context) {
 
         this.view = view;
-        this.interacted = new TodoRepository(context.getContentResolver());
+        this.interacted = new TodoRepositorySQLite(context.getContentResolver());
         this.context = context;
     }
 

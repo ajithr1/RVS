@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.common;
+package com.ajith.rvsqlite.Model_SQLite;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -6,19 +6,19 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.ajith.rvsqlite.Model.ContentProvider.TodoContract;
-import com.ajith.rvsqlite.Model.Entity.Todo;
+import com.ajith.rvsqlite.Model_SQLite.ContentProvider.TodoContract;
+import com.ajith.rvsqlite.common.Entity.Todo;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.ajith.rvsqlite.View.ListActivity.TAG;
 
-public class TodoRepository implements IListInteracted {
+public class TodoRepositorySQLite implements IListModelSQLite {
 
     private ContentResolver contentResolver;
 
-    public TodoRepository(ContentResolver contentResolver) {
+    public TodoRepositorySQLite(ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
     }
 
@@ -57,7 +57,7 @@ public class TodoRepository implements IListInteracted {
 
     @Override
     public void create(Todo todo) {
-        Log.d(TAG, "create: in TodoRepository");
+        Log.d(TAG, "create: in TodoRepositorySQLite");
         save(todo);
     }
 
@@ -72,7 +72,7 @@ public class TodoRepository implements IListInteracted {
     }
 
     private void save(Todo todo) {
-        Log.d(TAG, "save: TodoRepository");
+        Log.d(TAG, "save: TodoRepositorySQLite");
         ContentValues values = new ContentValues();
         values.put(TodoContract.TITLE, todo.getTitle());
 

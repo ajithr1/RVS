@@ -1,10 +1,10 @@
-package com.ajith.rvsqlite.common;
+package com.ajith.rvsqlite.Model_SQLite;
 
-import com.ajith.rvsqlite.Model.Entity.Todo;
+import com.ajith.rvsqlite.common.Entity.Todo;
 
 import java.util.ArrayList;
 
-public interface IListInteracted {
+public interface IListModelSQLite {
 
     /**
      * Get all To.Dos from database

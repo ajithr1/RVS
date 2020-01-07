@@ -1,18 +1,21 @@
 package com.ajith.rvsqlite.View;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.ajith.rvsqlite.Model.Entity.Todo;
+import com.ajith.rvsqlite.common.Entity.Testing;
+import com.ajith.rvsqlite.common.Entity.Todo;
 import com.ajith.rvsqlite.Presenter.IListPresenter;
 import com.ajith.rvsqlite.Presenter.ListPresenter;
 import com.ajith.rvsqlite.R;
@@ -46,6 +49,8 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
         // RecyclerView
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe);
+
         if (savedInstanceState == null) {
             listAdapter = new ListAdapter(this, new ArrayList<Todo>(), onTodoClickToEditListener, onEditItemInterface);
         } else {
@@ -57,7 +62,13 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
         recyclerView.setAdapter(listAdapter);
 
         // Presenter
-        getPresenter().refreshSession();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                getPresenter().refreshSession();
+            }
+        });
     }
 
     @Override
@@ -126,5 +137,21 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
         getPresenter().edit(todo);
         onBackPressed();
         getPresenter().refreshSession();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.test){
+            startActivity(new Intent(this, Testing.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

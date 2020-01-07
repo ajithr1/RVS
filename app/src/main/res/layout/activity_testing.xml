@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".common.Entity.Testing">
+
+    <EditText
+        android:id="@+id/insert_text"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/insert"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:onClick="insert"
+        android:text="@string/insert"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintStart_toEndOf="@+id/edit" />
+
+    <EditText
+        android:id="@+id/update_text"
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_text"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/insert_text"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/edit"
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:onClick="edit"
+        android:text="@string/edit"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="45dp" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:onClick="delete"
+        android:text="@string/delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insert_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/delete"
+        tools:listitem="@layout/list_item"
+        android:id="@+id/test_rc"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

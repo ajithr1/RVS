@@ -1,10 +1,10 @@
-package com.ajith.rvsqlite.Model.Connection;
+package com.ajith.rvsqlite.Model_SQLite.Connection;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ajith.rvsqlite.Model.ContentProvider.TodoContract;
+import com.ajith.rvsqlite.Model_SQLite.ContentProvider.TodoContract;
 
 public class Database extends SQLiteOpenHelper {
 

@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ajith.rvsqlite.Model.Entity.Todo;
+import com.ajith.rvsqlite.common.Entity.Todo;
 import com.ajith.rvsqlite.R;
 
 import java.util.ArrayList;

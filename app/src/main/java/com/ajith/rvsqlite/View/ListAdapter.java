@@ -90,7 +90,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                         Toast.makeText(context, todo.getTitle(), Toast.LENGTH_SHORT).show();
                                         break;
                                     case R.id.delete_option:
-                                        Log.d(TAG, "delete: adapter"+todo.getId());
+                                        Log.d(TAG, "delete:  adapter"+todo.getId());
                                         todoIOnClickToEditListener.onClickToEditListener(todo, position);
                                         todo_list.remove(position);
                                         notifyItemRemoved(position);

@@ -1,6 +1,6 @@
 package com.ajith.rvsqlite.Presenter;
 
-import com.ajith.rvsqlite.common.Entity.Todo;
+import com.ajith.rvsqlite.Model_SQLite.Entity.Todo;
 
 public interface IListPresenter {
 

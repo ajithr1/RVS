@@ -1,6 +1,6 @@
 package com.ajith.rvsqlite.Model_SQLite;
 
-import com.ajith.rvsqlite.common.Entity.Todo;
+import com.ajith.rvsqlite.Model_SQLite.Entity.Todo;
 
 import java.util.ArrayList;
 

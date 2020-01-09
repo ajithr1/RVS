@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.ajith.rvsqlite.Model_SQLite.ContentProvider.TodoContract;
-import com.ajith.rvsqlite.common.Entity.Todo;
+import com.ajith.rvsqlite.Model_SQLite.Entity.Todo;
 
 import java.util.ArrayList;
 import java.util.Objects;

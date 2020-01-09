@@ -1,22 +1,22 @@
 package com.ajith.rvsqlite.Model_Firebase;
 
-import com.ajith.rvsqlite.common.Entity.Todo;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.ajith.rvsqlite.Model_SQLite.Entity.Todo;
 
 public interface IListModelFirebase {
 
     /**
      * Get all To.Dos from database
      */
-    ArrayList<Todo> getFire();
+    void getFire(RecyclerView recyclerView);
 
     /**
      * Update old To.Do
      */
     void updateFire(Todo todo);
 
-    void createFire(Todo todo);
+    void createFire(long id, String name);
 
     void deleteFire(Todo todo);
 }

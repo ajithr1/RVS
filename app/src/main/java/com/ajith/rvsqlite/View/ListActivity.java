@@ -1,24 +1,28 @@
 package com.ajith.rvsqlite.View;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.ajith.rvsqlite.common.Entity.Testing;
-import com.ajith.rvsqlite.common.Entity.Todo;
+import com.ajith.rvsqlite.Model_SQLite.Entity.Todo;
 import com.ajith.rvsqlite.Presenter.IListPresenter;
 import com.ajith.rvsqlite.Presenter.ListPresenter;
 import com.ajith.rvsqlite.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,9 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
     private ListAdapter listAdapter;
 
     private Todo todo;
+    FloatingActionButton fab;
+
+    AlertDialog.Builder builder;
 
     public IListPresenter getPresenter() {
         if (presenter == null) {
@@ -46,10 +53,14 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d(TAG, "onCreate: ");
+
         // RecyclerView
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe);
+        fab = findViewById(R.id.floatingActionButton);
+        builder = new AlertDialog.Builder(this);
 
         if (savedInstanceState == null) {
             listAdapter = new ListAdapter(this, new ArrayList<Todo>(), onTodoClickToEditListener, onEditItemInterface);
@@ -69,11 +80,24 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
                 getPresenter().refreshSession();
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, "create: button Clicked");
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                CreateTodoFragment newTodo = CreateTodoFragment.newInstance();
+                fragmentManager.beginTransaction().addToBackStack(null).add(R.id.con, newTodo).commit();
+
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: ");
         getPresenter().refreshSession();
     }
 
@@ -90,14 +114,8 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
 
     @Override
     public void setTodo(ArrayList<Todo> todo) {
+        Log.d(TAG, "list activity");
         listAdapter.setTodo_list(todo);
-    }
-
-    public void create(View view) {
-        Log.d(TAG, "create: button Clicked");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        CreateTodoFragment newTodo = CreateTodoFragment.newInstance();
-        fragmentManager.beginTransaction().addToBackStack(null).add(R.id.con, newTodo).commit();
     }
 
     private ListAdapter.TodoViewHolder.DeleteItemInterface onTodoClickToEditListener = new ListAdapter.TodoViewHolder.DeleteItemInterface() {
@@ -149,7 +167,7 @@ public class ListActivity extends AppCompatActivity implements  CreateTodoFragme
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.test){
-            startActivity(new Intent(this, Testing.class));
+            //startActivity(new Intent(this, Testing.class));
         }
 
         return super.onOptionsItemSelected(item);

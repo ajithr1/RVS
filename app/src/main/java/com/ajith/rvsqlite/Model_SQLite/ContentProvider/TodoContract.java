@@ -8,7 +8,7 @@ public class TodoContract implements BaseColumns {
 
     public TodoContract() { }
 
-    private static final String AUTHORITY = "com.ajith.rvsqlite.Model.provider.TodoProvider";
+    private static final String AUTHORITY = "com.ajith.rvsqlite.Model_SQLite.provider.TodoProvider";
 
     private static final String ENDPOINT = "todo";
 

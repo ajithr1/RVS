@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ajith.rvsqlite.common.Entity.Todo;
+import com.ajith.rvsqlite.Model_SQLite.Entity.Todo;
 import com.ajith.rvsqlite.R;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_TODO = 1;
 
     ListAdapter(Context context, ArrayList<Todo> todo_list, TodoViewHolder.DeleteItemInterface todoDeleteItemInterface, TodoViewHolder.EditItemInterface editItemInterface) {
+        Log.d(TAG, "ListAdapter: constructor");
         this.context = context;
         this.todo_list = todo_list;
         this.todoDeleteItemInterface = todoDeleteItemInterface;
@@ -42,11 +44,13 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     void setTodo_list(ArrayList<Todo> todo_list) {
+        Log.d(TAG, "list adapter");
         this.todo_list = todo_list;
         notifyDataSetChanged();
     }
 
     ArrayList<Todo> getTodo_list() {
+        Log.d(TAG, "getTodo_list: ");
         return todo_list;
     }
 
@@ -55,9 +59,11 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_NO_TODO:
+                Log.d(TAG, "onCreateViewHolder: NO TODO");
                 View noTodoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.no_todo, parent, false);
                 return new NoTodoViewHolder(noTodoView);
             case TYPE_TODO:
+                Log.d(TAG, "onCreateViewHolder: TODO");
                 View todoView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
                 return new TodoViewHolder(todoView);
         }
@@ -116,6 +122,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount: "+todo_list.size());
         return (todo_list.size() == 0) ? 1 : todo_list.size();
     }
 
@@ -131,6 +138,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         TodoViewHolder(View itemView) {
             super(itemView);
+            Log.d(TAG, "TodoViewHolder: ");
             cardBackground = itemView.findViewById(R.id.recyclerView);
             card = itemView.findViewById(R.id.card_todo);
             title = itemView.findViewById(R.id.grocery_name);

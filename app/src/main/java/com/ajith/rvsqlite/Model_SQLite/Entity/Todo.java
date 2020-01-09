@@ -1,4 +1,4 @@
-package com.ajith.rvsqlite.common.Entity;
+package com.ajith.rvsqlite.Model_SQLite.Entity;
 
 import android.database.Cursor;
 import android.os.Parcel;
